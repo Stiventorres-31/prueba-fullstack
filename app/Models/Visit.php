@@ -10,7 +10,7 @@ class Visit extends Model
 {
 
     use HasFactory, SoftDeletes;
-   protected $fillable = [
+    protected $fillable = [
         'name',
         'email',
         'latitude',
@@ -18,6 +18,7 @@ class Visit extends Model
         'user_id',
     ];
 
+   
     /**
      * The attributes that should be cast to native types.
      *
@@ -25,6 +26,7 @@ class Visit extends Model
      */
     protected $casts = [
         'created_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
