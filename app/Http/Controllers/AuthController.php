@@ -21,13 +21,10 @@ class AuthController extends Controller
         $result = $this->authService->login($credentials);
 
         if (empty($result)) {
-            return ApiResource::error('Unauthorized', 401);
+            return ApiResource::error('Identification and/or password is incorrect', 401);
         }
 
-        return ApiResource::success([
-            'user' => $result['user'],
-            'token' => $result['token']
-        ],'Login successful', 200);
+        return ApiResource::success($result,'Login successful', 200);
     }
 
     public function logout()
