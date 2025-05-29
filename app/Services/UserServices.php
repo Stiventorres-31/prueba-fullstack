@@ -21,4 +21,17 @@ class UserServices
     public function findUserById(int $id){
         return $this->userRepository->findById($id);
     }
+    public function getAllUsers()
+    {
+        return $this->userRepository->getAll();
+    }
+
+    public function updateUser(int $id, array $user)
+    {
+        return $this->userRepository->update($id, $user);
+    }
+    public function deleteUser(int $id)
+    {
+        return $this->userRepository->delete($id);
+    }
 }

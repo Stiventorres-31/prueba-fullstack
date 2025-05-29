@@ -13,4 +13,22 @@ class UserRepository implements UserInterface
     public function findById(int $id){
         return User::find($id);
     }
+    public function getAll() {
+        return User::all();
+    }
+    public function update(int $id, array $user) {
+        $userModel = User::find($id);
+        if ($userModel) {
+            $userModel->update($user);
+            return $userModel;
+        }
+        return [];
+    }
+    public function delete(int $id) {
+        $userModel = User::find($id);
+        if ($userModel) {
+            return $userModel->delete();
+        }
+        return false;
+    }
 }

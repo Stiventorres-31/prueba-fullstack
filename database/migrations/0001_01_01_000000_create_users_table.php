@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('identification')->unique();
             $table->string('password');
             $table->string('role');
+            $table->softDeletes();
             $table->timestamps();
         });
 
