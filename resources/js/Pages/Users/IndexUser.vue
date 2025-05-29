@@ -59,8 +59,11 @@
                             @click="handleUpdateUser()">Update
                             User</button>
 
-                        <button type="submit" @click="handleCreateUser()"
-                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
+                        <button type="submit" @click="emptyForm()"
+                            class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 disabled:opacity-50 disabled:cursor-not-allowed">Cancel</button>
+
+                        <button type="submit" @click="handleCreateUser()" :disabled="editingUserId !== null"
+                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed">Create
                             User</button>
                     </div>
 
@@ -185,7 +188,7 @@ const handleUpdateUser = async () => {
 
 }
 const handleDeleteUser = async (id) => {
-   try {
+    try {
         const response = await deleteUser(id);
 
         console.log(response)
@@ -209,6 +212,7 @@ const handleAllUser = async () => {
 }
 
 const emptyForm = () => {
+    editingUserId.value = null
     form.value = {
         name: '',
         identification: '',
