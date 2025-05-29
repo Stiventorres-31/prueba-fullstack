@@ -24,7 +24,7 @@ class AuthController extends Controller
             return ApiResource::error('Identification and/or password is incorrect', 401);
         }
 
-        return ApiResource::success($result,'Login successful', 200);
+        return ApiResource::success($result, 'Login successful', 200);
     }
 
     public function logout()
@@ -36,5 +36,15 @@ class AuthController extends Controller
         }
 
         return ApiResource::success([], 'Logout successful', 200);
+    }
+
+    public function checkToken()
+    {
+        $check = $this->authService->checkAuth();
+
+        if ($check) {
+            return ApiResource::error('Invalid', 401);
+        }
+        return ApiResource::success([], 'Valid', 200);
     }
 }

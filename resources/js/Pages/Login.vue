@@ -45,7 +45,8 @@
 
 <script setup>
 import { ref } from 'vue';
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const form = ref({
     identification: '',
     password: ''
@@ -53,23 +54,28 @@ const form = ref({
 
 const isLoading = ref(false);
 const errorMessage = ref('');
-const handlePostLoginRedirect = async () => {
-    try {
-        const authCheck = await fetch('/api/user', {
-            credentials: 'include'
-        });
+// const handlePostLoginRedirect = async () => {
+//     try {
+//         $token = sessionStorage.getItem("token")
+//         const authCheck = await fetch('/api/user', {
+//             credentials: 'include',
+//             headers: {
+//                 Accept: 'application/json',
+//                 Authorization: `Bearer ${token}`
+//             }
+//         });
 
-        if (authCheck.ok) {
-            const redirectPath = new URLSearchParams(window.location.search).get('redirect') || '/dashboard';
-            window.location.href = redirectPath;
-        } else {
-            throw new Error('La autenticación no se completó correctamente');
-        }
-    } catch (error) {
-        console.error('Error verificando autenticación:', error);
-        errorMessage.value = 'Ocurrió un error después del login';
-    }
-};
+//         if (authCheck.ok) {
+//             const redirectPath = new URLSearchParams(window.location.search).get('redirect') || '/dashboard';
+//             window.location.href = redirectPath;
+//         } else {
+//             throw new Error('La autenticación no se completó correctamente');
+//         }
+//     } catch (error) {
+//         console.error('Error verificando autenticación:', error);
+//         errorMessage.value = 'Ocurrió un error después del login';
+//     }
+// };
 const handleSubmit = async () => {
     isLoading.value = true;
     errorMessage.value = '';
@@ -77,6 +83,7 @@ const handleSubmit = async () => {
     try {
         const response = await fetch('/api/auth/login', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -91,14 +98,15 @@ const handleSubmit = async () => {
             throw new Error(data.message || 'Login failed');
         }
 
-        console.log(data)
+        console.log(data.result )
 
-        // if (data.result.token) {
-        //     localStorage.setItem('auth_token', data.token);
-        //     window.location.href = '/dashboard';
-        // }
+        if (data.result.token) {
+            sessionStorage.setItem('token', data.result.token);
+            router.push('dashboard')
+            //window.location.href = '/dashboard';
+        }
 
-        await handlePostLoginRedirect()
+        //await handlePostLoginRedirect()
 
     } catch (error) {
         errorMessage.value = error.message || 'An error occurred during login';

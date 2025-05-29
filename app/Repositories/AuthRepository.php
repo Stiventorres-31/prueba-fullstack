@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\AuthInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthRepository implements AuthInterface
 {
@@ -15,30 +16,26 @@ class AuthRepository implements AuthInterface
         $user = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        $cookies = cookie(
-            'auth_token',   // Nombre
-            $token,         // Valor
-            5,         // Tiempo de vida en minutos (30 días)
-            null,          // Path (toda la aplicación)
-            null,          // Dominio
-            true,          // Secure (solo HTTPS)
-            true,          // HTTP Only
-            false,         // SameSite (puede ser 'strict' o 'lax')
-            'None'
-        );
-        return response([
+        //Session::put('user_id',$user->id);
+
+        return [
             'user' => $user,
             'token' => $token
-        ])->withCookie($cookies);
+        ];
     }
 
     public function logout()
     {
         $user = Auth::user();
         if ($user) {
+            Session::forget('user_id');
             $user->currentAccessToken()->delete();
             return true;
         }
         return false;
+    }
+
+    public function checkAuth(){
+        return Auth::user();
     }
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace App\Services;
@@ -22,6 +22,11 @@ class AuthServices
     public function logout()
     {
         return $this->authRepository->logout();
+    }
+
+    public function checkAuth(){
+        return empty($this->authRepository->checkAuth());
+
     }
 }
 ?>
