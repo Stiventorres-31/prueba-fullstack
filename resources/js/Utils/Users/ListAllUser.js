@@ -12,8 +12,8 @@ const allUser = async () => {
     }
   });
 
+  console.log(response)
   if (!response.ok) throw new Error('Error al obtener usuarios');
-
   const data = await response.json();
   return data;
 };

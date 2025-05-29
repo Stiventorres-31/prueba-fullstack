@@ -87,8 +87,11 @@
                                     <td class="px-4 py-2 text-gray-700">{{ user.identification }}</td>
                                     <td class="px-4 py-2 text-gray-700">{{ user.role }}</td>
                                     <td class="px-4 py-2 text-gray-700">
-                                        <button @click="handleDeleteUser(user.id)">Eliminar|</button>
-                                        <button @click="editUser(user.id)">Ver</button>
+                                        <button @click="handleDeleteUser(user.id)"
+                                            class="text-red-500 font-semibold">Eliminar</button>
+                                        <span>|</span>
+                                        <button class="text-blue-500 font-semibold"
+                                            @click="editUser(user.id)">Ver</button>
                                     </td>
 
                                     <!-- <td class="px-4 py-2 text-gray-700">
@@ -101,7 +104,7 @@
                         </table>
                     </div>
                 </div>
-                <!-- Puedes añadir más columnas si lo deseas -->
+
             </div>
 
         </div>
@@ -112,6 +115,8 @@
 <script setup>
 import AppLayout from '../../Layouts/AppLayout.vue';
 import createUser from './../../Utils/Users/createUser.js'
+import updateUser from './../../Utils/Users/updateUser.js'
+import deleteUser from './../../Utils/Users/deleteUser.js'
 import { onMounted, ref } from 'vue';
 import allUser from './../../Utils/Users/ListAllUser.js'
 import showUser from './../../Utils/Users/showUser.js'
@@ -126,29 +131,23 @@ const form = ref({
     password: '',
     role: ''
 });
-
+// Listamos a los usuarios con la construccion de la pagina
 onMounted(async () => {
-    try {
-        const response = await allUser();
-        users.value = response.result
-        console.log(users.value)
-    } catch (err) {
-        error.value = err.message;
-    }
 
+    handleAllUser()
 })
+
+// Action para realizar la peticion de crear usuario
 const handleCreateUser = async () => {
     const response = await createUser(form.value)
     alert(response)
-    form.value = {
-        name: '',
-        identification: '',
-        password: '',
-        role: ''
-    };
-    const res = await allUser();
-    users.value = res.result;
+    handleAllUser()
+    emptyForm()
+
 }
+
+// Action para ver la informacion del usuario al seleccionarlo en la tabla
+// se cargan en el formulario
 const editingUserId = ref(null);
 
 const editUser = async (user) => {
@@ -171,10 +170,50 @@ const editUser = async (user) => {
 };
 
 const handleUpdateUser = async () => {
-    alert(editingUserId.value)
+
+    try {
+        const response = await updateUser(form.value, editingUserId.value);
+
+        console.log(response)
+        alert(response.message)
+        handleAllUser()
+        emptyForm()
+    } catch (err) {
+        error.value = err.message;
+    }
+
+
 }
 const handleDeleteUser = async (id) => {
-    alert(id)
+   try {
+        const response = await deleteUser(id);
+
+        console.log(response)
+        alert(response.message)
+        handleAllUser()
+        emptyForm()
+    } catch (err) {
+        error.value = err.message;
+    }
 }
 
+const handleAllUser = async () => {
+    try {
+        const response = await allUser();
+        users.value = response.result
+
+    } catch (err) {
+        error.value = err.message;
+    }
+
+}
+
+const emptyForm = () => {
+    form.value = {
+        name: '',
+        identification: '',
+        password: '',
+        role: ''
+    };
+}
 </script>

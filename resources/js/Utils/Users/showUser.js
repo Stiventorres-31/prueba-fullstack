@@ -1,4 +1,4 @@
-const token =sessionStorage.getItem('token')
+const token = sessionStorage.getItem('token')
 const showUser = async (id) => {
     const response = await fetch(`/api/user/${id}`, {
         method: 'GET',
@@ -11,7 +11,8 @@ const showUser = async (id) => {
         }
     });
 
-    if (!response.ok) throw new Error('Error al obtener usuarios');
+    console.log(response)
+    if (!response.ok) throw new Error('Error al consultar un usuario');
 
     const data = await response.json();
     console.log(data)
