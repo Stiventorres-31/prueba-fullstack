@@ -35,6 +35,9 @@ El proyecto fue desarrollado utilizando una **Arquitectura en Capas**, implement
 
 - Comando Artisan:
     - Crear visitas desde consola con validación de datos.
+- Testing
+    - Testing unit
+    - Testing Feature
 
 ## Características
 

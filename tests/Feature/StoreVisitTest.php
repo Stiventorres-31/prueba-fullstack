@@ -30,8 +30,8 @@ class StoreVisitTest extends TestCase
     }
     public function test_store_controller_visit(): void
     {
-        $user = \App\Models\User::factory()->create(); // Asegúrate de tener UserFactory
-        $this->actingAs($user); // O Sanctum::actingAs($user); si usas Sanctum
+        $user = \App\Models\User::factory()->create(); 
+        $this->actingAs($user);
         $visitData = [
             'name' => 'Chadia Stiven',
             'email' => 'chadia@example.com',
