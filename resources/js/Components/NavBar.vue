@@ -30,9 +30,9 @@
 
         <!-- Mobile nav -->
         <div v-if="mobileMenuOpen" class="sm:hidden px-4 pb-4">
-            <router-link to="/dashboard" class="block py-2 text-gray-700 hover:text-blue-600">Dashboard</router-link>
-            <router-link to="/users/1" class="block py-2 text-gray-700 hover:text-blue-600">Perfil</router-link>
-            <button @click="logout" class="block py-2 text-red-500 hover:text-red-700">Cerrar sesión</button>
+            <router-link to="/users" class="block py-2 text-gray-700 hover:text-blue-600">Users</router-link>
+            <router-link to="/visits" class="block py-2 text-gray-700 hover:text-blue-600">Visits</router-link>
+            <button @click="logout" class="block py-2 text-red-500 hover:text-red-700">Logout</button>
         </div>
     </nav>
 </template>
