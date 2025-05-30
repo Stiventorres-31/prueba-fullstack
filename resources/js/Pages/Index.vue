@@ -34,11 +34,11 @@ onMounted(async () => {
     })
     const data = await res.json()
 
-    data.result.forEach(v => {
+    data.result.forEach(visit => {
 
-        console.log(v.latitude, v.longitude)
-        const marker = L.marker([v.latitude, v.longitude]).addTo(map)
-        marker.bindPopup(`<b>${v.name}</b><br>${v.email}`)
+        console.log(visit.latitude, visit.longitude)
+        const marker = L.marker([parseFloat(visit.latitude), parseFloat(visit.longitude)]).addTo(map)
+        marker.bindPopup(`<b>${visit.name}</b><br>${visit.email}`)
     })
 })
 </script>

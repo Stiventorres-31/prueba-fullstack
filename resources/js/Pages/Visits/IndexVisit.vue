@@ -127,7 +127,7 @@ import deleteVisit from './../../Utils/Visits/deleteVisit.js'
 import { onMounted, ref } from 'vue';
 
 
-// const visits = ref([]);
+const visits = ref([]);
 const error = ref(null);
 const editingVisitId = ref(null);
 const router = useRouter()
