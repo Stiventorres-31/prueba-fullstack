@@ -13,12 +13,6 @@ El proyecto fue desarrollado utilizando una **Arquitectura en Capas**, implement
 - **Capa de Modelos**: Representaciones de las entidades y su mapeo a las tablas de la base de datos.
 - **Capa de Helpers**: Funciones utilitarias que apoyan a diferentes componentes de la aplicación.
 
-## 🎯 Beneficios de esta Arquitectura
-- **Escalabilidad**: Permite agregar nuevas funcionalidades de manera sencilla sin afectar otras capas.
-- **Mantenibilidad**: Facilita la localización y corrección de errores o mejoras en el código.
-- **Testabilidad**: Gracias al desacoplamiento de las capas, se facilita la implementación de pruebas unitarias y de integración.
-- **Flexibilidad**: Posibilidad de cambiar tecnologías o mecanismos internos sin afectar a toda la aplicación.
-
 
 ## Funcionalidades
 - Autenticación de usuarios con protección de rutas API.
