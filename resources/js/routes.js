@@ -9,8 +9,8 @@ import ShowUser from './Pages/Users/ShowUser.vue';
 const routes = [
     { name: 'login', path: '/', component: Login },
     { name: 'dashboard', path: '/dashboard', component: Index, meta: { requiresAuth: true } },
-    { name: 'users', path: '/users', component: IndexUser },
-    { name: 'visits', path: '/visits', component: IndexVisit },
+    { name: 'users', path: '/users', component: IndexUser, meta: { requiresAuth: true } },
+    { name: 'visits', path: '/visits', component: IndexVisit, meta: { requiresAuth: true } },
     // { name: 'users/show', path: '/users/:id', component: ShowUser }
 ];
 
