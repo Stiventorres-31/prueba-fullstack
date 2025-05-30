@@ -19,9 +19,15 @@ El proyecto fue desarrollado utilizando una **Arquitectura en Capas**, implement
 - CRUD completo para la gestión de visitas:
     - Crear nuevas visitas.
     - Consultar todas las visitas o una visita específica.
+    - Paginacion para mostrar todas las visitas
     - Actualizar información de visitas.
     - Eliminar visitas registradas.
 
+- CRUD completo para la gestión de usuarios:
+    - Crear un usuario.
+    - Consultar todos los usuarios o un usuario específico.
+    - Actualizar información del usuario.
+    - Eliminar usuarios registrados.
 - Visualización en mapa:
 
     - Renderizado de las visitas como marcadores.
