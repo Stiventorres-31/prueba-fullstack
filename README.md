@@ -3,20 +3,20 @@
 Este proyecto consiste en el desarrollo de una API RESTful y una interfaz web construidas con Laravel 12, MySQL y Vue.js, orientadas a la gestión de visitas de clientes. La solución incluye un sistema de autenticación segura y una visualización de ubicaciones en un mapa interactivo.
 
 ## Funcionalidades
--Autenticación de usuarios con protección de rutas API.
--CRUD completo para la gestión de visitas:
-    -Crear nuevas visitas.
-    -Consultar todas las visitas o una visita específica.
-    -Actualizar información de visitas.
-    -Eliminar visitas registradas.
+- Autenticación de usuarios con protección de rutas API.
+- CRUD completo para la gestión de visitas:
+    - Crear nuevas visitas.
+    - Consultar todas las visitas o una visita específica.
+    - Actualizar información de visitas.
+    - Eliminar visitas registradas.
 
--Visualización en mapa:
+- Visualización en mapa:
 
-    -Renderizado de las visitas como marcadores.
-    -Popups interactivos mostrando nombre y correo electrónico.
+    - Renderizado de las visitas como marcadores.
+    - Popups interactivos mostrando nombre y correo electrónico.
 
--Comando Artisan:
-    -Crear visitas desde consola con validación de datos.
+- Comando Artisan:
+    - Crear visitas desde consola con validación de datos.
 
 ## Características
 
