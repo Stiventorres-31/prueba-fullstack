@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div id="app"></div>
+    <div class="bg-[#A2D5FF] h-screen" id="app"></div>
 </body>
 
 </html>

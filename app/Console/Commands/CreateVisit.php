@@ -10,7 +10,7 @@ use function Laravel\Prompts\text;
 class CreateVisit extends Command
 {
     /**
-     * 10.955961-74.7799936
+     *
      * The name and signature of the console command.
      *
      * @var string

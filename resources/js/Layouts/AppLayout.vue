@@ -1,10 +1,10 @@
-<template>
+<template >
     <header>
         <header class="">
             <NavBar />
         </header>
     </header>
-    <div class="p-5">
+    <div class="">
         <slot />
     </div>
 </template>

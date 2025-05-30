@@ -46,6 +46,6 @@ class VisitRepository implements VisitInterface
     }
 
     public function getAllVisitsPaginate(){
-        return Visit::paginate(5);
+        return Visit::paginate(4);
     }
 }

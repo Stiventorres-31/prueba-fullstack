@@ -1,6 +1,6 @@
 <template>
     <AppLayout>
-        <div class="">
+        <div class="p-10">
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 rounded shadow text-center">
@@ -8,38 +8,38 @@
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-3">
-                            <label for="name" class="block text-sm/6 font-medium text-gray-900">Name</label>
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-700">Name</label>
                             <div class="mt-2">
-                                <input type="text" v-model="form.name" name="name" id="name" autocomplete="name"
-                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                <input type="text" v-model="form.name" name="name" id="name" autocomplete="name" placeholder="Enter name"
+                                    class="block w-full rounded-lg border border-gray-300 p-3 text-gray-700 focus:border-indigo-500 focus:ring-indigo-500">
                             </div>
                         </div>
 
                         <div class="sm:col-span-3">
                             <label for="identification"
-                                class="block text-sm/6 font-medium text-gray-900">Identification</label>
+                                class="block mb-2 text-sm font-medium text-gray-700">Identification</label>
                             <div class="mt-2">
                                 <input type="text" v-model="form.identification" name="identification"
-                                    id="identification" autocomplete="identification"
-                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                    id="identification" autocomplete="identification" placeholder="Enter identification"
+                                    class="block w-full rounded-md border border-gray-300 p-3 text-gray-700 focus:border-indigo-500 focus:ring-indigo-500">
                             </div>
                         </div>
 
                         <div class="sm:col-span-3">
-                            <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-700">Password</label>
                             <div class="mt-2">
                                 <input type="password" v-model="form.password" name="password" id="password"
-                                    autocomplete="password"
-                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                    autocomplete="password" placeholder="***********"
+                                    class="block w-full rounded-md border border-gray-300 p-3 text-gray-700 focus:border-indigo-500 focus:ring-indigo-500">
                             </div>
                         </div>
 
                         <div class="sm:col-span-3">
-                            <label for="role" class="block text-sm/6 font-medium text-gray-900">Role</label>
+                            <label for="role" class="block mb-2 text-sm font-medium text-gray-700">Role</label>
                             <div class="mt-2 grid grid-cols-1">
                                 
                                 <select id="role" name="role" autocomplete="role" v-model="form.role"
-                                    class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                    class="col-start-1 row-start-1 w-full appearance-none rounded-md border border-gray-300 p-3 text-gray-700 focus:border-indigo-500 focus:ring-indigo-500">
                                     <option :selected="form.role === 'Administrator'">Administrator</option>
                                     <option>Asesor</option>
                                 </select>
@@ -54,17 +54,17 @@
 
                     </div>
 
-                    <div class="mt-6 flex items-center justify-between w-full">
+                    <div class="flex flex-col md:flex-row justify-between gap-4 mt-4">
                         <button :disabled="editingUserId === null"
-                            class="rounded-md bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="flex-1 py-3 rounded-lg bg-yellow-500 text-white font-bold hover:bg-yellow-600 disabled:opacity-50 transition disabled:cursor-not-allowed"
                             @click="handleUpdateUser()">Update
                             User</button>
 
                         <button type="submit" @click="emptyForm()"
-                            class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Cancel</button>
+                            class="flex-1 py-3 rounded-lg bg-gray-600 text-white font-bold hover:bg-gray-700 transition">Cancel</button>
 
                         <button type="submit" @click="handleCreateUser()" :disabled="editingUserId !== null"
-                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed">Create
+                            class="flex-1 py-3 rounded-lg bg-indigo-600 text-white font-bold hover:bg-indigo-700 disabled:opacity-50 transition disabled:cursor-not-allowed">Create
                             User</button>
                     </div>
 
@@ -74,39 +74,34 @@
 
                     <div v-if="error" class="text-red-500">{{ error }}</div>
 
-                    <div v-else class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Name</th>
-                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Identification</th>
-                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Role</th>
-                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase"></th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100">
-                                <tr v-for="user in users" :key="user">
+                   <div v-else class="overflow-x-auto">
+  <table class="w-full text-left border-collapse">
+    <thead class="bg-gray-50 text-gray-700 text-sm uppercase">
+      <tr>
+        <th class="px-6 py-4">Name</th>
+        <th class="px-6 py-4">Identification</th>
+        <th class="px-6 py-4">Role</th>
+        <th class="px-6 py-4 text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="user in users" :key="user.id" class="border-b hover:bg-gray-50 transition">
+        <td class="px-6 py-4 text-gray-700">{{ user.name }}</td>
+        <td class="px-6 py-4 text-gray-700">{{ user.identification }}</td>
+        <td class="px-6 py-4 text-gray-700">{{ user.role }}</td>
+        <td class="px-6 py-4 text-center space-x-2">
+          <button @click="handleDeleteUser(user.id)" class="text-red-500 hover:text-red-700 font-bold">
+            Delete
+          </button>
+          <button @click="editUser(user.id)" class="text-blue-500 hover:text-blue-700 font-bold">
+            View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-                                    <td class="px-4 py-2 text-gray-700">{{ user.name }}</td>
-                                    <td class="px-4 py-2 text-gray-700">{{ user.identification }}</td>
-                                    <td class="px-4 py-2 text-gray-700">{{ user.role }}</td>
-                                    <td class="px-4 py-2 text-gray-700">
-                                        <button @click="handleDeleteUser(user.id)"
-                                            class="text-red-500 font-semibold">Eliminar</button>
-                                        <span>|</span>
-                                        <button class="text-blue-500 font-semibold"
-                                            @click="editUser(user.id)">Ver</button>
-                                    </td>
-
-                                    <!-- <td class="px-4 py-2 text-gray-700">
-                                        <router-link :to="{ name: 'users/show', params: { id: user.id } }">
-                                            Ver usuario
-                                        </router-link>
-                                    </td> -->
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
 
             </div>
