@@ -44,38 +44,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import checkAuth from "./../Utils/ValidarToken.js";
+import { ref ,onMounted} from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const form = ref({
     identification: '',
     password: ''
 });
-
+onMounted(async () => {
+    const isAuthenticated = await checkAuth();
+    if (isAuthenticated) {
+        router.push('/dashboard');
+    }
+});
 const isLoading = ref(false);
 const errorMessage = ref('');
-// const handlePostLoginRedirect = async () => {
-//     try {
-//         $token = sessionStorage.getItem("token")
-//         const authCheck = await fetch('/api/user', {
-//             credentials: 'include',
-//             headers: {
-//                 Accept: 'application/json',
-//                 Authorization: `Bearer ${token}`
-//             }
-//         });
-
-//         if (authCheck.ok) {
-//             const redirectPath = new URLSearchParams(window.location.search).get('redirect') || '/dashboard';
-//             window.location.href = redirectPath;
-//         } else {
-//             throw new Error('La autenticación no se completó correctamente');
-//         }
-//     } catch (error) {
-//         console.error('Error verificando autenticación:', error);
-//         errorMessage.value = 'Ocurrió un error después del login';
-//     }
-// };
 const handleSubmit = async () => {
     isLoading.value = true;
     errorMessage.value = '';
