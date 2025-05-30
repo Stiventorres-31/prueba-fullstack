@@ -2,7 +2,7 @@
 
 Este proyecto consiste en el desarrollo de una API RESTful y una interfaz web construidas con Laravel 12, MySQL y Vue.js, orientadas a la gestión de visitas de clientes.
 
-# Arquitectura del Proyecto
+## Arquitectura del Proyecto
 
 El proyecto fue desarrollado utilizando una **Arquitectura en Capas**, implementando el **Patrón Service-Repository**, siguiendo principios de diseño limpio y buenas prácticas:
 
