@@ -56,12 +56,16 @@ El proyecto fue desarrollado utilizando una **Arquitectura en Capas**, implement
     ```
 
 ## Uso
-
-1. Inicia el backend:
+Lo primero es correr las migraciones y los seeders
+1. Migraciones y Seeders
+    ```bash
+    php artisan migrate --seed
+    ```
+2. Inicia el backend:
     ```bash
     php artisan serve
     ```
-2. Inicia el frontend:
+3. Inicia el frontend:
     ```bash
     npm run dev
     ```
