@@ -42,6 +42,10 @@ class VisitRepository implements VisitInterface
 
     public function getAllVisits()
     {
-        return Visit::with('user')->get();
+        return Visit::all();
+    }
+
+    public function getAllVisitsPaginate(){
+        return Visit::paginate(5);
     }
 }

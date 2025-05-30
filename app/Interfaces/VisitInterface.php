@@ -9,4 +9,5 @@ interface VisitInterface
     public function updateVisit(int $id, array $data);
     public function deleteVisit(int $id);
     public function getAllVisits();
+    public function getAllVisitsPaginate();
 }

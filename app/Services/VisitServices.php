@@ -38,4 +38,9 @@ class VisitServices
     {
         return $this->visitRepository->getAllVisits();
     }
+
+    public function getAllVisitsPaginate()
+    {
+        return $this->visitRepository->getAllVisitsPaginate();
+    }
 }

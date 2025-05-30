@@ -1,6 +1,6 @@
 <template>
     <AppLayout>
-        <div class="p-12">
+        <div class="">
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 rounded shadow text-center">
@@ -37,9 +37,10 @@
                         <div class="sm:col-span-3">
                             <label for="role" class="block text-sm/6 font-medium text-gray-900">Role</label>
                             <div class="mt-2 grid grid-cols-1">
+                                
                                 <select id="role" name="role" autocomplete="role" v-model="form.role"
                                     class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                                    <option>Administrador</option>
+                                    <option :selected="form.role === 'Administrator'">Administrator</option>
                                     <option>Asesor</option>
                                 </select>
                                 <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
@@ -54,13 +55,13 @@
                     </div>
 
                     <div class="mt-6 flex items-center justify-between w-full">
-                        <button
-                            class="rounded-md bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        <button :disabled="editingUserId === null"
+                            class="rounded-md bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed"
                             @click="handleUpdateUser()">Update
                             User</button>
 
                         <button type="submit" @click="emptyForm()"
-                            class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 disabled:opacity-50 disabled:cursor-not-allowed">Cancel</button>
+                            class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Cancel</button>
 
                         <button type="submit" @click="handleCreateUser()" :disabled="editingUserId !== null"
                             class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed">Create
@@ -69,7 +70,7 @@
 
                 </div>
                 <div class="bg-white p-6 rounded shadow text-center">
-                    <h1>Lista de usuarios</h1>
+                    <h1>List Users</h1>
 
                     <div v-if="error" class="text-red-500">{{ error }}</div>
 
@@ -77,9 +78,9 @@
                         <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Nombre</th>
-                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Identificación</th>
-                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Rol</th>
+                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Name</th>
+                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Identification</th>
+                                    <th class="px-4 py-3 font-medium text-gray-500 uppercase">Role</th>
                                     <th class="px-4 py-3 font-medium text-gray-500 uppercase"></th>
                                 </tr>
                             </thead>
@@ -124,7 +125,7 @@ import { onMounted, ref } from 'vue';
 import allUser from './../../Utils/Users/ListAllUser.js'
 import showUser from './../../Utils/Users/showUser.js'
 import { useRouter } from 'vue-router'
-
+const editingUserId = ref(null);
 const router = useRouter()
 const users = ref([]);
 const error = ref(null);
@@ -132,7 +133,7 @@ const form = ref({
     name: '',
     identification: '',
     password: '',
-    role: ''
+    role: 'Administrator'
 });
 // Listamos a los usuarios con la construccion de la pagina
 onMounted(async () => {
@@ -151,7 +152,7 @@ const handleCreateUser = async () => {
 
 // Action para ver la informacion del usuario al seleccionarlo en la tabla
 // se cargan en el formulario
-const editingUserId = ref(null);
+
 
 const editUser = async (user) => {
     try {
@@ -184,8 +185,6 @@ const handleUpdateUser = async () => {
     } catch (err) {
         error.value = err.message;
     }
-
-
 }
 const handleDeleteUser = async (id) => {
     try {

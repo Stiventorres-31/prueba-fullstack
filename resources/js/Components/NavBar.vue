@@ -5,7 +5,7 @@
                 <!-- Logo -->
                 <div class="flex items-center">
                     <router-link to="/dashboard" class="text-xl font-bold text-gray-800">
-                        MiApp
+                        Stiven Torres
                     </router-link>
                 </div>
 
@@ -21,9 +21,9 @@
 
                 <!-- Desktop nav -->
                 <div class="hidden sm:flex sm:items-center sm:space-x-4">
-                    <router-link to="/users" class="text-gray-700 hover:text-blue-600">Usuarios</router-link>
-                    <router-link to="/users/1" class="text-gray-700 hover:text-blue-600">Perfil</router-link>
-                    <button @click="logout" class="text-red-500 hover:text-red-700">Cerrar sesión</button>
+                    <router-link to="/users" class="text-gray-700 hover:text-blue-600">Users</router-link>
+                    <router-link to="/visits" class="text-gray-700 hover:text-blue-600">Visits</router-link>
+                    <button @click="logout" class="text-red-500 hover:text-red-700">Logout</button>
                 </div>
             </div>
         </div>

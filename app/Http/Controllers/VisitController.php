@@ -21,6 +21,11 @@ class VisitController extends Controller
         $visits = $this->visitServices->getAllVisits();
         return ApiResource::success($visits, 'Visits retrieved successfully');
     }
+    
+    public function paginate(){
+         $visits = $this->visitServices->getAllVisitsPaginate();
+        return ApiResource::success($visits, 'Visits retrieved successfully');
+    }
     public function store(VisitCreateRequest $request)
     {
         $visit = $this->visitServices->createVisit($request->validated());
