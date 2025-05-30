@@ -4,7 +4,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Formulario -->
         <div class="bg-white p-6 rounded-xl shadow-lg">
-          <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Create Visit</h2>
+          <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Create Visit</h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -45,7 +45,7 @@
             </button>
 
             <button :disabled="editingVisitId !== null" @click="handleCreateVisit"
-              class="flex-1 py-3 rounded-lg bg-indigo-600 text-white font-bold hover:bg-indigo-700 disabled:opacity-50 transition">
+              class="flex-1 py-3 rounded-lg bg-indigo-600  text-white font-bold hover:bg-indigo-700 disabled:opacity-50 transition">
               Create Visit
             </button>
           </div>
@@ -54,7 +54,7 @@
 
         <!-- Tabla -->
         <div class="bg-white p-8 rounded-xl shadow-lg">
-          <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">List Visits</h2>
+          <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">List Visits</h2>
 
           <div v-if="error" class="text-center text-red-500">{{ error }}</div>
 
@@ -76,11 +76,13 @@
                   <td class="px-6 py-4 text-gray-700">{{ visit.latitude }}</td>
                   <td class="px-6 py-4 text-gray-700">{{ visit.longitude }}</td>
                   <td class="px-6 py-4 text-center space-x-2">
-                    <button @click="handleDeleteVisit(visit.id)" class="text-red-500 hover:text-red-700 font-bold">
-                      Delete
+                    <button title="Delete visit" @click="handleDeleteVisit(visit.id)"
+                      class="text-red-500 hover:text-red-700 font-bold">
+                      🗑️
                     </button>
-                    <button @click="getVisit(visit.id)" class="text-blue-500 hover:text-blue-700 font-bold">
-                      View
+                    <button title="View visit" @click="getVisit(visit.id)"
+                      class="text-blue-500 hover:text-blue-700 font-bold">
+                      👁️
                     </button>
                   </td>
                 </tr>
@@ -163,14 +165,18 @@ const handleCreateVisit = async () => {
   }
 }
 const handleDeleteVisit = async (id) => {
-  try {
-    const response = await deleteVisit(id);
-    alert(response.message)
-    handleAllVisitPaginate()
-    emptyForm()
-  } catch (err) {
-    error.value = err.message;
+  if (confirm("Are you sure you want to delete this visit?")) {
+    try {
+
+      const response = await deleteVisit(id);
+      alert(response.message)
+      handleAllVisitPaginate()
+      emptyForm()
+    } catch (err) {
+      error.value = err.message;
+    }
   }
+
 }
 const getVisit = async (id) => {
   try {

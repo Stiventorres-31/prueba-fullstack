@@ -4,13 +4,14 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 rounded shadow text-center">
-                    <h2>Create User</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Create User</h2>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-3">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-700">Name</label>
                             <div class="mt-2">
-                                <input type="text" v-model="form.name" name="name" id="name" autocomplete="name" placeholder="Enter name"
+                                <input type="text" v-model="form.name" name="name" id="name" autocomplete="name"
+                                    placeholder="Enter name"
                                     class="block w-full rounded-lg border border-gray-300 p-3 text-gray-700 focus:border-indigo-500 focus:ring-indigo-500">
                             </div>
                         </div>
@@ -37,7 +38,7 @@
                         <div class="sm:col-span-3">
                             <label for="role" class="block mb-2 text-sm font-medium text-gray-700">Role</label>
                             <div class="mt-2 grid grid-cols-1">
-                                
+
                                 <select id="role" name="role" autocomplete="role" v-model="form.role"
                                     class="col-start-1 row-start-1 w-full appearance-none rounded-md border border-gray-300 p-3 text-gray-700 focus:border-indigo-500 focus:ring-indigo-500">
                                     <option :selected="form.role === 'Administrator'">Administrator</option>
@@ -70,37 +71,39 @@
 
                 </div>
                 <div class="bg-white p-6 rounded shadow text-center">
-                    <h1>List Users</h1>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-8 text-center">List Users</h1>
 
                     <div v-if="error" class="text-red-500">{{ error }}</div>
 
-                   <div v-else class="overflow-x-auto">
-  <table class="w-full text-left border-collapse">
-    <thead class="bg-gray-50 text-gray-700 text-sm uppercase">
-      <tr>
-        <th class="px-6 py-4">Name</th>
-        <th class="px-6 py-4">Identification</th>
-        <th class="px-6 py-4">Role</th>
-        <th class="px-6 py-4 text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="user in users" :key="user.id" class="border-b hover:bg-gray-50 transition">
-        <td class="px-6 py-4 text-gray-700">{{ user.name }}</td>
-        <td class="px-6 py-4 text-gray-700">{{ user.identification }}</td>
-        <td class="px-6 py-4 text-gray-700">{{ user.role }}</td>
-        <td class="px-6 py-4 text-center space-x-2">
-          <button @click="handleDeleteUser(user.id)" class="text-red-500 hover:text-red-700 font-bold">
-            Delete
-          </button>
-          <button @click="editUser(user.id)" class="text-blue-500 hover:text-blue-700 font-bold">
-            View
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+                    <div v-else class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-gray-50 text-gray-700 text-sm uppercase">
+                                <tr>
+                                    <th class="px-6 py-4">Name</th>
+                                    <th class="px-6 py-4">Identification</th>
+                                    <th class="px-6 py-4">Role</th>
+                                    <th class="px-6 py-4 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="user in users" :key="user.id" class="border-b hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 text-gray-700">{{ user.name }}</td>
+                                    <td class="px-6 py-4 text-gray-700">{{ user.identification }}</td>
+                                    <td class="px-6 py-4 text-gray-700">{{ user.role }}</td>
+                                    <td class="px-6 py-4 text-center space-x-2">
+                                        <button @click="handleDeleteUser(user.id)" title="Delete User"
+                                            class="text-red-500 hover:text-red-700 font-bold">
+                                            🗑️
+                                        </button>
+                                        <button @click="editUser(user.id)" title="View User"
+                                            class="text-blue-500 hover:text-blue-700 font-bold">
+                                            👁️
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
 
@@ -182,15 +185,16 @@ const handleUpdateUser = async () => {
     }
 }
 const handleDeleteUser = async (id) => {
-    try {
-        const response = await deleteUser(id);
-
-        console.log(response)
-        alert(response.message)
-        handleAllUser()
-        emptyForm()
-    } catch (err) {
-        error.value = err.message;
+    if (confirm("Are you sure you want to delete this user?")) {
+        try {
+            const response = await deleteUser(id);
+            console.log(response)
+            alert(response.message)
+            handleAllUser()
+            emptyForm()
+        } catch (err) {
+            error.value = err.message;
+        }
     }
 }
 
