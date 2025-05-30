@@ -58,12 +58,12 @@
 
           <div v-if="error" class="text-center text-red-500">{{ error }}</div>
 
-          <div v-else class="overflow-x-auto max-h-[400px] overflow-y-auto">
+          <div v-else class="overflow-x-auto max-h-[350px] overflow-y-auto">
             <table class="w-full text-left border-collapse">
               <thead class="bg-gray-50 text-gray-700 text-sm uppercase">
                 <tr>
-                  <th class="px-6 py-4">Name</th>
-                  <!-- <th class="px-6 py-4">Email</th> -->
+                  <th class="px-6 py-4 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">Name</th>
+                  <th class="px-6 py-4 whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]">Email</th>
                   <th class="px-6 py-4">Latitude</th>
                   <th class="px-6 py-4">Longitude</th>
                   <th class="px-6 py-4 text-center">Actions</th>
@@ -72,7 +72,7 @@
               <tbody>
                 <tr v-for="visit in pagination.data" :key="visit.id" class="border-b hover:bg-gray-50 transition">
                   <td class="px-6 py-4 text-gray-700">{{ visit.name }}</td>
-                  <!-- <td class="px-6 py-4 text-gray-700">{{ visit.email }}</td> -->
+                  <td class="px-6 py-4 text-gray-700">{{ visit.email }}</td> 
                   <td class="px-6 py-4 text-gray-700">{{ visit.latitude }}</td>
                   <td class="px-6 py-4 text-gray-700">{{ visit.longitude }}</td>
                   <td class="px-6 py-4 text-center space-x-2">
